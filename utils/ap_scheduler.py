@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
-
+import time
 from apscheduler.schedulers.background import BackgroundScheduler
 
 
@@ -20,7 +20,7 @@ def timely_execute(function, hour, minute, args):
 
 
 if __name__ == '__main__':
-    timely_execute(_test, 7, 30, [])
+    timely_execute(_test, 22, 31, [])
     # while True:
     #     print('main-start:', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
     #     time.sleep(3)
