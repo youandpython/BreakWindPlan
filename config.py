@@ -39,7 +39,7 @@ is_listen_sharing = True
 listen_sharing_groups = '游侠客全球领队颜值担当'
 
 # 定时提醒：每天几点几分
-timing_hour = '8'
+timing_hour = '7'
 timing_minute = '30'
 timing_remind_groups = '游侠客全球领队颜值担当|万里阳光-户外休闲社|冲鸭!每天学点Python-56|游侠客南京站领队群'
 timing_location = '南京'
