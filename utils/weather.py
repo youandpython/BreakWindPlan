@@ -20,9 +20,9 @@ def get(city_name):
         info.append('{0} 当前温度：{1}℃'.format(a['city'], a['wendu']))
         info.append('温馨提示：{}'.format(a['ganmao']))
         info.append("-----------------------------")
-        for i in range(1, 3):
+        for i in range(0, 3):
             info.append('{0} {1}'.format(a["forecast"][i]['date'], a["forecast"][i]['type']))
-            feng_li = a["forecast"][i]['fengli'][9: [m.start() for m in re.finditer(']', a['yesterday']['fl'])][0]]
+            feng_li = re.findall(r".*<!\[CDATA\[(.*)\]\]>.*", a["forecast"][i]['fengli'])[0]
             info.append('{0} {1}'.format(a["forecast"][i]['fengxiang'], feng_li))
             info.append(a["forecast"][i]['high'])
             info.append(a["forecast"][i]['low'])
@@ -89,5 +89,5 @@ def get_timing(city_name):
 
 
 if __name__ == '__main__':
-    result = get_timing('南 京')
+    result = get('南 京')
     print(result)
