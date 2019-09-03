@@ -94,7 +94,7 @@ def load_timely_remind(bot):
         bot.listen_sharing_groups = []
         bot.is_listen_sharing = False
         return '未找到群名包含「{}」的定时提醒群！'.format(config.listen_sharing_groups)
-    weather_info = weather.get_timing(config.timing_location)
+    weather_info = weather.get(config.timing_location)
     for group in groups:
         group.send(weather_info)
     return None

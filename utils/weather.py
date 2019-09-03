@@ -24,8 +24,12 @@ def get(city_name):
             info.append('{0} {1}'.format(a["forecast"][i]['date'], a["forecast"][i]['type']))
             feng_li = re.findall(r".*<!\[CDATA\[(.*)\]\]>.*", a["forecast"][i]['fengli'])[0]
             info.append('{0} {1}'.format(a["forecast"][i]['fengxiang'], feng_li))
-            info.append(a["forecast"][i]['high'])
-            info.append(a["forecast"][i]['low'])
+
+            high_list = re.findall(r'\d+(?:\.\d+)?', a["forecast"][i]['high'])
+            high = high_list[0] if len(high_list) > 0 else '未知'
+            low_list = re.findall(r'\d+(?:\.\d+)?', a["forecast"][i]['low'])
+            low = low_list[0] if len(low_list) > 0 else '未知'
+            info.append('温度：{0}℃/{1}℃'.format(low, high))
             info.append("-----------------------------")
     return '\r\n'.join(info)
 
