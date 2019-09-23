@@ -1,13 +1,17 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
+import os
 import re
-# 好友功能
-import utils.weather as weather
-import utils.metro_timetable as metro
+
+import config as conf
+import utils.digit_recognition as digit
 import utils.lunar as lunar
+import utils.metro_timetable as metro
 import utils.music_platform as music
+import utils.weather as weather
 
 
+# 好友功能
 def auto_accept_friends(msg):
     """自动接受好友"""
     # 接受好友请求
@@ -20,6 +24,14 @@ def auto_reply(msg):
     """自动回复"""
     # 关键字回复
     keyword_reply(msg)
+
+
+def auto_reply_pic(msg):
+    """图片回复"""
+    pic_path = os.path.join(conf.pic_temp_path, msg.file_name)
+    msg.get_file(save_path=pic_path)
+    text = digit.get_digit(pic_path)
+    return msg.reply(text)
 
 
 def handle_system_msg(msg):
@@ -50,7 +62,8 @@ def forward_revoke_msg(msg):
                 msg.bot.master.send('「{0}」撤回了一张名片：\n名称：{1}，性别：{2}'.format(sender_name, old_msg_item.card.name, sex))
             else:
                 # 转发被撤回的消息
-                old_msg_item.forward(msg.bot.master, prefix='{}撤回了一条{}：'.format(sender_name, get_msg_chinese_type(old_msg_item.type)))
+                old_msg_item.forward(msg.bot.master,
+                                     prefix='{}撤回了一条{}：'.format(sender_name, get_msg_chinese_type(old_msg_item.type)))
             return None
 
 
@@ -82,7 +95,7 @@ def get_msg_chinese_type(msg_type):
 
 def keyword_reply(msg):
     """关键字回复"""
-    text = msg.text.lower()
+    text = msg.text.strip().lower()
     if text.startswith('tq'):
         info = tq_info(text, 'tq')
         return msg.reply(info)
