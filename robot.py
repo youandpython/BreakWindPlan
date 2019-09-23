@@ -27,6 +27,9 @@ def friend_msg(msg):
     if msg.type == TEXT:
         wx_reply.auto_reply(msg)
         return None
+    elif msg.type == PICTURE:
+        wx_reply.auto_reply_pic(msg)
+        return None
     else:
         pass
 

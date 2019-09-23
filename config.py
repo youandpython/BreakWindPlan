@@ -8,6 +8,8 @@ import os
 cur_path = os.path.dirname(os.path.realpath(__file__))
 # 获取QR.png的路径
 qr_path = os.path.join(cur_path, 'QR.png')
+# 获取临时图片文件夹的路径
+pic_temp_path = os.path.join(cur_path, 'pic_temp')
 
 # 机器人主人, 使用备注名更安全，只允许一个，可远程控制机器人，如果不设置(空)则将文件助手设置为管理员，但不具备远程控制功能
 bot_master_name = 'DoggerX'
