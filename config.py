@@ -31,7 +31,7 @@ listen_friend_groups = '游侠客全球领队颜值担当|擦鞋匠交流群|万
 listen_friend_names = ''
 
 # 打开转发模式，主人发送给机器人的消息都将转发至forward_groups群
-is_forward_mode = False
+is_forward_mode = True
 # 需要将消息转发的群，匹配模式同上
 forward_groups = '游侠客全球领队颜值担当'
 
@@ -43,5 +43,5 @@ listen_sharing_groups = '游侠客全球领队颜值担当'
 # 定时提醒：每天几点几分
 timing_hour = '7'
 timing_minute = '30'
-timing_remind_groups = '万里阳光-户外休闲社|冲鸭!每天学点Python-56|游侠客南京站领队群'
+timing_remind_groups = '游侠客全球领队颜值担当|万里阳光-户外休闲社|冲鸭!每天学点Python-56|游侠客南京站领队群'
 timing_location = '南京'
