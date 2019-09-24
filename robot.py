@@ -13,6 +13,8 @@ bot = Bot(cache_path=True, qr_path=config.qr_path, console_qr=False)
 load.load_config_to_bot(bot)
 
 """好友功能"""
+
+
 @bot.register(msg_types=FRIENDS)
 def auto_accept_friends(msg):
     """自动接受好友请求"""
@@ -25,16 +27,15 @@ def friend_msg(msg):
     if not msg.bot.is_friend_auto_reply:
         return None
     if msg.type == TEXT:
-        wx_reply.auto_reply(msg)
+        wx_reply.auto_reply(msg, 'friend')
         return None
-    # elif msg.type == PICTURE:
-    #     wx_reply.auto_reply_pic(msg)
-    #     return None
     else:
         pass
 
 
 """群功能"""
+
+
 @bot.register(chats=Group)
 def group_msg(msg):
     """接收群消息"""
@@ -44,10 +45,10 @@ def group_msg(msg):
             if msg.bot.is_group_at_reply:
                 # @机器人才回复
                 if msg.is_at:
-                    wx_reply.auto_reply(msg)
+                    wx_reply.auto_reply(msg, 'group')
             else:
                 # 不用@直接回复
-                wx_reply.auto_reply(msg)
+                wx_reply.auto_reply(msg, 'group')
     elif msg.type == SHARING and msg.bot.is_listen_sharing and msg.chat in msg.bot.listen_sharing_groups:
         # 群分享转发监控，防止分享广告
         msg.forward(msg.bot.master, prefix='分享监控：「{0}」在「{1}」分享了：'.format(msg.member.name, msg.chat.name))
@@ -69,6 +70,8 @@ def system_msg(msg):
 
 
 """管理员功能"""
+
+
 @bot.register(chats=bot.master)
 def do_command(msg):
     """执行管理员命令"""

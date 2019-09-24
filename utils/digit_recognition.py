@@ -140,5 +140,5 @@ import config as conf
 #     for index, pic_path in enumerate(pics):
 #         # print_digit(remove_background(pic_path))
 #         # print_digit(binaryzation(pic_path))
-#         smartSliceImg(pic_path, os.path.join(conf.pic_temp_path, '切图1'), count=16)
+#         smartSliceImg(pic_path, os.path.join(conf.pic_temp_path, '切图'), count=16)
 #         print(index)
