@@ -126,4 +126,14 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-/pic_temp
+/pic_temp/test
+/pic_temp/二值化
+/pic_temp/切图
+/pic_temp/去底色
+/pic_temp/降噪
+/pic_temp/123.png
+/pic_temp/bank.png
+/pic_temp/number.png
+/pic_temp/tx.jpg
+
+/wxpy.pkl

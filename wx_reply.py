@@ -2,9 +2,9 @@
 # _*_ coding:utf-8 _*_
 import os
 import re
-
+import time
 import config as conf
-import utils.digit_recognition as digit
+import utils.picture_processing as pic_pro
 import utils.lunar as lunar
 import utils.metro_timetable as metro
 import utils.music_platform as music
@@ -20,18 +20,10 @@ def auto_accept_friends(msg):
     new_friend.send('我已自动接受了您的好友请求')
 
 
-def auto_reply(msg):
+def auto_reply(msg, chat_type):
     """自动回复"""
     # 关键字回复
-    keyword_reply(msg)
-
-
-def auto_reply_pic(msg):
-    """图片回复"""
-    pic_path = os.path.join(conf.pic_temp_path, msg.file_name)
-    msg.get_file(save_path=pic_path)
-    text = digit.get_digit(pic_path)
-    return msg.reply(text)
+    keyword_reply(msg, chat_type)
 
 
 def handle_system_msg(msg):
@@ -93,30 +85,35 @@ def get_msg_chinese_type(msg_type):
         return '系统'
 
 
-def keyword_reply(msg):
+def keyword_reply(msg, chat_type):
     """关键字回复"""
     text = msg.text.strip().lower()
     if text.startswith('tq'):
-        info = tq_info(text, 'tq')
-        return msg.reply(info)
+        info = tq_info(text)
+        msg.reply(info)
     # elif text.startswith('dt'):
     #     info = dt_info(text, 'dt')
     #     return msg.reply(info)
     elif text == 'hl':
         info = lunar.get()
-        return msg.reply(info)
+        msg.reply(info)
     # elif text.startswith('mc'):
     #     info = mc_info(text, 'mc')
     #     return msg.reply(info)
-    pass
+    elif text.startswith('我爱'):
+        if chat_type == 'group':
+            pic_path = pic_info(msg.member, text)
+        else:
+            pic_path = pic_info(msg.chat, text)
+        msg.reply_image(pic_path)
 
 
-def tq_info(text, tag):
-    dm = text.lstrip(tag).strip()
+def tq_info(text):
+    dm = text.lstrip('tq').strip()
     if len(dm) > 0:
         info = weather.get(dm)
         return info
-    return '输入格式不正确'
+    return None
 
 
 def dt_info(text, tag):
@@ -129,7 +126,7 @@ def dt_info(text, tag):
         if len(dms) == 1:
             info = metro.get(dms[0], '')
             return info
-    return '输入格式不正确'
+    return None
 
 
 def mc_info(text, tag):
@@ -137,4 +134,24 @@ def mc_info(text, tag):
     if len(dm) > 0:
         info = music.get(dm)
         return info
-    return '输入格式不正确'
+    return None
+
+
+def pic_info(friend, text):
+    """回复图片"""
+    content = text.lstrip('我爱').strip()
+    if len(content) > 0:
+        if content == '纳龙':
+            water_mark_type = 'nl'
+        elif content == '游侠客':
+            water_mark_type = 'yxk'
+        elif content.lower() == 'csdn':
+            water_mark_type = 'csdn'
+        else:
+            return None
+        pic_rename = friend.user_name[:8] + '.png'
+        pic_path = os.path.join(conf.pic_temp_path, 'head_pic', pic_rename)
+        friend.get_avatar(pic_path)
+        head_new_path = pic_pro.create_nike_image(pic_path, water_mark_type, pic_rename)
+        return head_new_path
+    return None
