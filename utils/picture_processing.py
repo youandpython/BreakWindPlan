@@ -6,11 +6,11 @@ import os
 import config as conf
 
 
-def create_nike_image(pic_path, water_mark_type, pic_name):
+def create_nike_image(pic_path, water_mark_type, pic_with_watermark_path):
     # 打开头像
     nike_image = Image.open(pic_path)
     # 创建底图
-    target = Image.new('RGBA', (nike_image.width, nike_image.height), (0, 0, 0, 0))
+    target = Image.new('RGB', (nike_image.width, nike_image.height), (0, 0, 0, 0))
     # 打开装饰
     logo = Image.open(os.path.join(conf.pic_temp_path, 'head_water_mark', water_mark_type + '.png'))
     # 缩放logo图片
@@ -25,12 +25,10 @@ def create_nike_image(pic_path, water_mark_type, pic_name):
     logo.convert("RGBA")
     target.paste(logo, position, mask=a)
     # 保存图片
-    pic_with_watermark_path = os.path.join(conf.pic_temp_path, 'head_pic_with_water_mark',
-                                           water_mark_type + '_' + pic_name)
-    target.save(pic_with_watermark_path, 'PNG')
+    target.save(pic_with_watermark_path)
     return pic_with_watermark_path
 
 
 if __name__ == '__main__':
     create_nike_image(r"E:\Python3_Test\BreakWindPlan\pic_temp\tx.jpg",
-                      "yxk", 'test.png')
+                      "yxk", 'E:\\Python3_Test\\BreakWindPlan\\pic_temp\\tx1.jpg')
