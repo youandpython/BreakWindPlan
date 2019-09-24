@@ -90,13 +90,13 @@ def keyword_reply(msg, chat_type):
     text = msg.text.strip().lower()
     if text.startswith('tq'):
         info = tq_info(text)
-        return msg.reply(info)
+        msg.reply(info)
     # elif text.startswith('dt'):
     #     info = dt_info(text, 'dt')
     #     return msg.reply(info)
     elif text == 'hl':
         info = lunar.get()
-        return msg.reply(info)
+        msg.reply(info)
     # elif text.startswith('mc'):
     #     info = mc_info(text, 'mc')
     #     return msg.reply(info)
@@ -105,9 +105,7 @@ def keyword_reply(msg, chat_type):
             pic_path = pic_info(msg.member, text)
         else:
             pic_path = pic_info(msg.chat, text)
-        time.sleep(5)
-        return msg.reply_image(pic_path)
-    pass
+        msg.reply_image(pic_path)
 
 
 def tq_info(text):
@@ -115,7 +113,7 @@ def tq_info(text):
     if len(dm) > 0:
         info = weather.get(dm)
         return info
-    return ''
+    return None
 
 
 def dt_info(text, tag):
@@ -128,7 +126,7 @@ def dt_info(text, tag):
         if len(dms) == 1:
             info = metro.get(dms[0], '')
             return info
-    return ''
+    return None
 
 
 def mc_info(text, tag):
@@ -136,7 +134,7 @@ def mc_info(text, tag):
     if len(dm) > 0:
         info = music.get(dm)
         return info
-    return ''
+    return None
 
 
 def pic_info(friend, text):
@@ -150,10 +148,10 @@ def pic_info(friend, text):
         elif content.lower() == 'csdn':
             water_mark_type = 'csdn'
         else:
-            return ''
+            return None
         pic_rename = friend.user_name[:8] + '.png'
         pic_path = os.path.join(conf.pic_temp_path, 'head_pic', pic_rename)
         friend.get_avatar(pic_path)
         head_new_path = pic_pro.create_nike_image(pic_path, water_mark_type, pic_rename)
         return head_new_path
-    return ''
+    return None
