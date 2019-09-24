@@ -2,7 +2,7 @@
 # _*_ coding:utf-8 _*_
 import os
 import re
-import time
+
 import config as conf
 import utils.picture_processing as pic_pro
 import utils.lunar as lunar
@@ -102,9 +102,10 @@ def keyword_reply(msg, chat_type):
     #     return msg.reply(info)
     elif text.startswith('我爱'):
         if chat_type == 'group':
-            pic_path = pic_info(msg.member, text)
+            user = msg.member
         else:
-            pic_path = pic_info(msg.chat, text)
+            user = msg.chat
+        pic_path = pic_info(user, text)
         msg.reply_image(pic_path)
 
 
