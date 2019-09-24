@@ -8,7 +8,7 @@ import wx_reply as wx_reply
 import wx_command as wx_command
 
 # 微信机器人，缓存登录信息，调用初始化方法
-bot = Bot(cache_path=True, qr_path=config.qr_path, console_qr=False)
+bot = Bot(cache_path=True, qr_path=config.qr_path, console_qr=True)
 # 加载配置信息到机器人
 load.load_config_to_bot(bot)
 
