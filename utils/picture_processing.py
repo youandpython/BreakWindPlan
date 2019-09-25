@@ -26,7 +26,6 @@ def create_nike_image(pic_path, water_mark_type, pic_with_watermark_path):
     target.paste(logo, position, mask=a)
     # 保存图片
     target.save(pic_with_watermark_path)
-    return pic_with_watermark_path
 
 
 if __name__ == '__main__':
