@@ -18,7 +18,7 @@ def create_nike_image(pic_path, water_mark_type, pic_with_watermark_path):
     # 分离透明通道
     r, g, b, a = logo.split()
     # 将头像贴到底图
-    position = ((nike_image.width - logo.width), (nike_image.height - logo.height))
+    position = (0, (nike_image.height - logo.height))
     nike_image.convert("RGBA")
     target.paste(nike_image, (0, 0))
     # 将装饰贴到底图
@@ -31,4 +31,4 @@ def create_nike_image(pic_path, water_mark_type, pic_with_watermark_path):
 
 if __name__ == '__main__':
     create_nike_image(r"E:\Python3_Test\BreakWindPlan\pic_temp\tx.jpg",
-                      "yxk", 'E:\\Python3_Test\\BreakWindPlan\\pic_temp\\tx1.jpg')
+                      "csdn", 'E:\\Python3_Test\\BreakWindPlan\\pic_temp\\tx1.jpg')
