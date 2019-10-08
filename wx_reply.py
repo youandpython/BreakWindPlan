@@ -148,6 +148,8 @@ def pic_info(friend, text):
             water_mark_type = 'yxk'
         elif content.lower() == 'csdn':
             water_mark_type = 'csdn'
+        elif content.lower() == '海贼王':
+            water_mark_type = 'hzw'
         else:
             return None
 

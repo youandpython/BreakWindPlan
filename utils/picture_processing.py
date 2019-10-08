@@ -27,5 +27,6 @@ def create_nike_image(pic_path, water_mark_path, pic_with_watermark_path):
 
 
 if __name__ == '__main__':
-    create_nike_image(r"E:\Python3_Test\BreakWindPlan\pic_temp\tx.jpg",
-                      "csdn", 'E:\\Python3_Test\\BreakWindPlan\\pic_temp\\tx1.jpg')
+    create_nike_image(r'E:\Python3_Test\BreakWindPlan\pic_temp\head_pic\tx.jpg',
+                      r'E:\Python3_Test\BreakWindPlan\pic_temp\head_water_mark\hzw.png',
+                      r'E:\Python3_Test\BreakWindPlan\pic_temp\tx1.jpg')
