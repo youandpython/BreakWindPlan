@@ -150,11 +150,13 @@ def pic_info(friend, text):
             water_mark_type = 'csdn'
         else:
             return None
+
         pic_rename = friend.user_name[:8] + '.jpg'
         pic_path = os.path.join(conf.pic_temp_path, 'head_pic', pic_rename)
         friend.get_avatar(pic_path)
         pic_with_watermark_path = os.path.join(conf.pic_temp_path, 'head_pic_with_water_mark',
                                                water_mark_type + '_' + pic_rename)
-        pic_pro.create_nike_image(pic_path, water_mark_type, pic_with_watermark_path)
+        water_mark_path = os.path.join(conf.pic_temp_path, 'head_water_mark', water_mark_type + '.png')
+        pic_pro.create_nike_image(pic_path, water_mark_path, pic_with_watermark_path)
         return pic_with_watermark_path
     return None

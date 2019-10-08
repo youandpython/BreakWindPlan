@@ -26,7 +26,11 @@ is_forward_revoke_msg = True
 # 监听某些好友群聊，如老板
 is_listen_friend = True
 # 在这些群里监听好友说的话，匹配模式：包含“唯一集团工作群”的群
-listen_friend_groups = '游侠客全球领队颜值担当|擦鞋匠交流群|万里阳光-户外休闲社|冲鸭!每天学点Python-56'
+listen_friend_groups = '游侠客全球领队颜值担当|擦鞋匠交流群|万里阳光-户外休闲社' \
+                       '|冲鸭!每天学点Python-56' \
+                       '|CSDN-Python技术栈-28V' \
+                       '|CSDN-Python技术栈-27V' \
+                       '|CSDN-Python技术栈-26V'
 # 需要监听的人名称，使用备注名更安全，允许多个用|分隔，如：主管|项目经理|产品狗
 listen_friend_names = ''
 

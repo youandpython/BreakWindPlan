@@ -2,17 +2,15 @@
 # _*_ coding:utf-8 _*_
 
 from PIL import Image
-import os
-import config as conf
 
 
-def create_nike_image(pic_path, water_mark_type, pic_with_watermark_path):
+def create_nike_image(pic_path, water_mark_path, pic_with_watermark_path):
     # 打开头像
     nike_image = Image.open(pic_path)
     # 创建底图
     target = Image.new('RGB', (nike_image.width, nike_image.height), (0, 0, 0, 0))
     # 打开装饰
-    logo = Image.open(os.path.join(conf.pic_temp_path, 'head_water_mark', water_mark_type + '.png'))
+    logo = Image.open(water_mark_path)
     # 缩放logo图片
     logo.thumbnail((nike_image.width * 0.5, nike_image.height * 0.5))
     # 分离透明通道

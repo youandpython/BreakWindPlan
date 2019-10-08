@@ -126,14 +126,14 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-/pic_temp/test
-/pic_temp/二值化
-/pic_temp/切图
-/pic_temp/去底色
-/pic_temp/降噪
-/pic_temp/123.png
-/pic_temp/bank.png
-/pic_temp/number.png
-/pic_temp/tx.jpg
+/pic_temp/digit_recognition/test
+/pic_temp/digit_recognition/二值化
+/pic_temp/digit_recognition/切图
+/pic_temp/digit_recognition/去底色
+/pic_temp/digit_recognition/降噪
+/pic_temp/digit_recognition/123.png
+/pic_temp/digit_recognition/bank.png
+/pic_temp/digit_recognition/number.png
+/pic_temp/head_pic/tx.jpg
 
 /wxpy.pkl
