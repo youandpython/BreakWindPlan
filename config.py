@@ -48,6 +48,7 @@ listen_sharing_groups = '游侠客全球领队颜值担当'
 timing_hour = '7'
 timing_minute = '30'
 timing_remind_groups = '万里阳光-户外休闲社|游侠客南京站领队群' \
+                       '|长营社区党建群' \
                        '|冲鸭!每天学点Python-56' \
                        '|CSDN-Python技术栈-28V' \
                        '|CSDN-Python技术栈-27V' \
