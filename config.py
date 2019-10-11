@@ -42,11 +42,15 @@ forward_groups = '游侠客全球领队颜值担当'
 # 群分享监控
 is_listen_sharing = True
 # 监控群分享，匹配模式同上
-listen_sharing_groups = '游侠客全球领队颜值担当'
+listen_sharing_groups = '游侠客全球领队颜值担当' \
+                       '|冲鸭!每天学点Python-56' \
+                       '|CSDN-Python技术栈-28V' \
+                       '|CSDN-Python技术栈-27V' \
+                       '|CSDN-Python技术栈-26V'
 
 # 定时提醒：每天几点几分
-timing_hour = '7'
-timing_minute = '30'
+timing_hour = 7
+timing_minute = 30
 timing_remind_groups = '万里阳光-户外休闲社|游侠客南京站领队群' \
                        '|长营社区党建群' \
                        '|冲鸭!每天学点Python-56' \

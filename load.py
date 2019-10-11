@@ -4,6 +4,7 @@
 import config as config
 import utils.ap_scheduler as ap_scheduler
 import utils.weather as weather
+import utils.iciba as iciba
 
 
 def load_config_to_bot(bot):
@@ -37,7 +38,8 @@ def load_config_to_bot(bot):
     load_forward_groups(bot)
     load_listen_sharing_groups(bot)
     # 每天定时提醒
-    ap_scheduler.timely_execute(load_timely_remind, config.timing_hour, config.timing_minute, args=[bot])
+    ap_scheduler.timely_execute(load_timely_remind_weather, config.timing_hour, config.timing_minute, args=[bot])
+    ap_scheduler.timely_execute(load_timely_remind_iciba, config.timing_hour+1, config.timing_minute, args=[bot])
     # 发送机器人状态信息
     bot_status = bot_status if '文件助手' in bot_status else bot_status + bot_status_detail(bot)
     bot.master.send(bot_status)
@@ -87,8 +89,8 @@ def load_listen_sharing_groups(bot):
     return None
 
 
-def load_timely_remind(bot):
-    """定时提醒"""
+def load_timely_remind_weather(bot):
+    """定时提醒天气"""
     groups = search_groups(bot, config.timing_remind_groups)
     if not len(groups):
         bot.listen_sharing_groups = []
@@ -97,6 +99,19 @@ def load_timely_remind(bot):
     weather_info = weather.get(config.timing_location)
     for group in groups:
         group.send(weather_info)
+    return None
+
+
+def load_timely_remind_iciba(bot):
+    """每日一句（双语）"""
+    groups = search_groups(bot, config.timing_remind_groups)
+    if not len(groups):
+        bot.listen_sharing_groups = []
+        bot.is_listen_sharing = False
+        return '未找到群名包含「{}」的定时提醒群！'.format(config.listen_sharing_groups)
+    iciba_info = iciba.get()
+    for group in groups:
+        group.send(iciba_info)
     return None
 
 
@@ -165,5 +180,3 @@ def search_groups(bot, groups):
         if len(result):
             result_list.extend(result)
     return result_list
-
-

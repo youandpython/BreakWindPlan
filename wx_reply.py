@@ -9,6 +9,11 @@ import utils.lunar as lunar
 import utils.metro_timetable as metro
 import utils.music_platform as music
 import utils.weather as weather
+import utils.rubbish as rubbish
+import utils.maoyan_movie as movie
+import utils.love_live as love_live
+import utils.joke as joke
+import utils.cai_hong_pi as cai_hong_pi
 
 
 # 好友功能
@@ -94,19 +99,44 @@ def keyword_reply(msg, chat_type):
     # elif text.startswith('dt'):
     #     info = dt_info(text, 'dt')
     #     return msg.reply(info)
-    elif text == 'hl':
+    elif text == '看个黄历':
         info = lunar.get()
         msg.reply(info)
     # elif text.startswith('mc'):
     #     info = mc_info(text, 'mc')
     #     return msg.reply(info)
-    elif text.startswith('我爱'):
+    elif text.startswith('爱上'):
         if chat_type == 'group':
             user = msg.member
         else:
             user = msg.chat
         pic_path = pic_info(user, text)
         msg.reply_image(pic_path)
+    elif text.startswith('lj'):
+        info = rubbish_info(text)
+        msg.reply(info)
+    elif text == '看个票房':
+        info = movie.get()
+        msg.reply(info)
+    elif text == '来段土味情话':
+        info = love_live.get()
+        msg.reply(info)
+    elif text == '来段笑话':
+        info = joke.get()
+        msg.reply(info)
+    elif text == '来段彩虹屁':
+        info = cai_hong_pi.get()
+        msg.reply(info)
+    elif text == '贡布求助':
+        info = '1.查询天气：tq地名\r\n' \
+               '2.查看黄历：看个黄历\r\n' \
+               '3.头像水印：爱上csdn/游侠客/海贼王\r\n' \
+               '4.垃圾分类：lj垃圾名\r\n' \
+               '5.当日票房：看个票房\r\n' \
+               '6.土味情话：来段土味情话\r\n' \
+               '7.笑话：来段笑话\r\n' \
+               '8.彩虹屁：来段彩虹屁'
+        msg.reply(info)
 
 
 def tq_info(text):
@@ -140,7 +170,7 @@ def mc_info(text, tag):
 
 def pic_info(friend, text):
     """回复图片"""
-    content = text.lstrip('我爱').strip()
+    content = text.lstrip('爱上').strip()
     if len(content) > 0:
         if content == '纳龙':
             water_mark_type = 'nl'
@@ -161,4 +191,12 @@ def pic_info(friend, text):
         water_mark_path = os.path.join(conf.pic_temp_path, 'head_water_mark', water_mark_type + '.png')
         pic_pro.create_nike_image(pic_path, water_mark_path, pic_with_watermark_path)
         return pic_with_watermark_path
+    return None
+
+
+def rubbish_info(text):
+    lj = text.lstrip('lj').strip()
+    if len(lj) > 0:
+        info = rubbish.get(lj)
+        return info
     return None
