@@ -18,7 +18,7 @@ def get(key):
         if resp.status_code == 200 and is_json(resp):
             content_dict = resp.json()
             if not content_dict:
-                raise Exception()
+                return f'未查询到{key}的所属分类'
 
             return_list = list(content_dict.values())
             type_list = [rl['type'] for rl in return_list if key == rl['name']]
@@ -33,5 +33,5 @@ def get(key):
 
 
 if __name__ == '__main__':
-    a = get('奶茶')
+    a = get('悟空')
     print(a)
