@@ -121,9 +121,9 @@ def keyword_reply(msg, chat_type):
     elif text == '来段土味情话':
         info = love_live.get()
         msg.reply(info)
-    # elif text == '来段笑话':
-    #     info = joke.get()
-    #     msg.reply(info)
+    elif text == '来段笑话':
+        info = joke.get()
+        msg.reply(info)
     elif text == '来段彩虹屁':
         info = cai_hong_pi.get()
         msg.reply(info)
