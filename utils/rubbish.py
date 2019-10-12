@@ -25,7 +25,7 @@ def get(key):
             if len(type_list):
                 return ','.join(list(set(type_list)))
             else:
-                other = ' '.join(i['name'] for i in return_list[:6])
+                other = '\r\n'.join(f"{i['name']}:{i['type']}" for i in return_list[:6])
                 return other
         return f'未查询到{key}的所属分类'
     except Exception:
@@ -33,5 +33,5 @@ def get(key):
 
 
 if __name__ == '__main__':
-    a = get('皮')
+    a = get('奶茶')
     print(a)

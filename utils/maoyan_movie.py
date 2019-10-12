@@ -2,8 +2,7 @@
 # _*_ coding:utf-8 _*_
 
 import requests
-
-from datetime import datetime
+import time
 from utils.common import SPIDER_HEADERS, generate_time, is_json
 
 
@@ -21,6 +20,7 @@ def get():
         if resp.status_code == 200 and is_json(resp):
             content_dict = resp.json()
             if content_dict['success']:
+                cur_date = time.strftime('%Y{y}%m{m}%d{d}').format(y='年', m='月', d='日')
                 data_dict = content_dict['data']
                 total_box_info = data_dict['totalBoxInfo']
                 box_list = data_dict['list']
@@ -30,15 +30,11 @@ def get():
                     movie_name = r['movieName']
                     box_info = r['boxInfo']
                     sum_box_info = r['sumBoxInfo']
-                    box_info_list.append('{}.《{}》({}万，累积:{})'.format(str(i + 1), movie_name, box_info, sum_box_info))
+                    release_info = r['releaseInfo']
+                    box_info_list.append(f'{str(i + 1)}.《{movie_name}》({box_info}万,{release_info},累积:{sum_box_info})')
 
-                cur_date = datetime.strptime(date_, '%Y%m%d').strftime('%Y{}%m{}%d{}').format('年', '月', '日')
-
-                return_text = "{cur_date} 票房信息\n当日总票房：{total_box_info}万\n{box_info}".format(
-                    cur_date=cur_date,
-                    total_box_info=total_box_info,
-                    box_info='\n'.join(box_info_list)
-                )
+                box_info = '\r\n'.join(box_info_list)
+                return_text = f"{cur_date} 票房信息\r\n当日总票房：{total_box_info}万\r\n{box_info}"
                 return return_text
             else:
                 return '获取票房失败:{}'.format(content_dict['msg'])
