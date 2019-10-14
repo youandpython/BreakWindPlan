@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
+import string
 
 import requests
 from utils.common import is_json, SPIDER_HEADERS
@@ -12,9 +13,13 @@ mainUrl = 'http://www.jokeji.cn'
 url = 'http://www.jokeji.cn/list.htm'
 
 
+def get_random_param(count: int):
+    return ''.join(random.sample(string.ascii_letters, count))
+
+
 def get():
     try:
-        resp = requests.get(url, headers=SPIDER_HEADERS)
+        resp = requests.get(f'{url}?{get_random_param(6)}={get_random_param(4)}', headers=SPIDER_HEADERS)
         if resp.status_code == 200:
             urls = rule_url.findall(resp.content.decode('GBK'))
             if len(urls) <= 0:
