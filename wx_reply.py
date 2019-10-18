@@ -12,7 +12,7 @@ import utils.weather as weather
 import utils.rubbish as rubbish
 import utils.maoyan_movie as movie
 import utils.love_live as love_live
-import utils.joke as joke
+import utils.train_time as train_time
 import utils.cai_hong_pi as cai_hong_pi
 
 
@@ -121,8 +121,8 @@ def keyword_reply(msg, chat_type):
     elif text == '来段土味情话':
         info = love_live.get()
         msg.reply(info)
-    elif text == '来段笑话':
-        info = joke.get()
+    elif text.startswith('lc'):
+        info = train_time_info(text)
         msg.reply(info)
     elif text == '来段彩虹屁':
         info = cai_hong_pi.get()
@@ -135,7 +135,7 @@ def keyword_reply(msg, chat_type):
                '4.当日票房：看个票房\r\n' \
                '5.土味情话：来段土味情话\r\n' \
                '6.听彩虹屁：来段彩虹屁\r\n' \
-               '7.想乐一乐：来段笑话\r\n' \
+               '7.列车时刻：lc车次\r\n' \
                '8.1.头像加CSDN水印：爱上csdn\r\n' \
                '8.2.头像加游侠客水印：爱上游侠客\r\n' \
                '8.3.头像加海贼王水印：爱上海贼王'
@@ -201,5 +201,13 @@ def rubbish_info(text):
     lj = text.lstrip('lj').strip()
     if len(lj) > 0:
         info = rubbish.get(lj)
+        return info
+    return None
+
+
+def train_time_info(text):
+    lc = text.lstrip('lc').strip()
+    if len(lc) > 0:
+        info = train_time.get(lc)
         return info
     return None
